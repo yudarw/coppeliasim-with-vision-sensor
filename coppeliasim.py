@@ -232,4 +232,4 @@ class CoppeliaSensor(CoppeliaSim):
 
     def getImage(self):
         ret, resolution, image = sim.simxGetVisionSensorImage(self.clientId, self.sensorHandle, 0, sim.simx_opmode_buffer)
-        return resolution, image
+        return ret, resolution, image

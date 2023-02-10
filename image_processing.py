@@ -95,7 +95,7 @@ sim.simxFinish(-1)
 clientId = sim.simxStart('127.0.0.1', 19997, True, True, 5000, 5)
 sim.simxStartSimulation(clientId, sim.simx_opmode_blocking)
 
-if clientId != -1:
+while clientId != -1:
     # Get vision sensor handle
     ret, visionHandle = sim.simxGetObjectHandle(clientId, '/Vision_sensor', sim.simx_opmode_oneshot_wait)
     # Start streaming image data
@@ -103,18 +103,20 @@ if clientId != -1:
 
     time.sleep(1)
     ret, resolution, image = sim.simxGetVisionSensorImage(clientId, visionHandle, 0, sim.simx_opmode_buffer)
-    if ret == sim.simx_return_ok:
-        img = np.array(image, dtype=np.uint8)
-        img.resize([resolution[1], resolution[0], 3])
-        img2 = cv.cvtColor(img, cv.COLOR_RGB2BGR)
-        img2 = cv.flip(img2, 0)
-        #a,b,c,d,e= filter_image(img2, 'green')
-        a = detect_orientation(img2)
+    
+    while True:
+        if ret == sim.simx_return_ok:
+            img = np.array(image, dtype=np.uint8)
+            img.resize([resolution[1], resolution[0], 3])
+            img2 = cv.cvtColor(img, cv.COLOR_RGB2BGR)
+            img2 = cv.flip(img2, 0)
+            #a,b,c,d,e= filter_image(img2, 'green')
+            a = detect_orientation(img2)
+        cv.waitKey(5)
 
+    #elif ret == sim.simx_return_novalue_flag:
+    #    print('No image yet')
+    #    pass
 
-    elif ret == sim.simx_return_novalue_flag:
-        print('No image yet')
-        pass
-
-    if cv.waitKey(0):
-        cv.destroyAllWindows()
+    #if cv.waitKey(0):
+    #    cv.destroyAllWindows()

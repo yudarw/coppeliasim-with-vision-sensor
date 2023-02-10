@@ -66,7 +66,7 @@ def detect_orientation(img):
         # (center(x, y), (width, height), angle of rotation) = cv2.minAreaRect(c)
         rect = cv.minAreaRect(c)
         box = cv.boxPoints(rect)
-        box = np.int0(box)
+        box = np.intp(box)
 
         # Retrieve the key parameters of the rotated bounding box
         center = (int(rect[0][0]), int(rect[0][1]))
@@ -111,7 +111,8 @@ time.sleep(2)
 while sim.simxGetConnectionId(mSim.clientId != -1):
     ret, res, image = camera.getImage()    
     if ret == sim.simx_return_ok:
-        img = np.array(image, dtype=np.uint8)
+        #img = np.array(image, dtype=np.uint8)
+        img = np.array(image).astype(dtype=np.uint8)
         img.resize([res[1], res[0], 3])
         img2 = cv.cvtColor(img, cv.COLOR_RGB2BGR)
         img2 = cv.flip(img2, 0)

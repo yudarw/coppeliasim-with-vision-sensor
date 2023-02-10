@@ -116,17 +116,8 @@ while sim.simxGetConnectionId(mSim.clientId != -1):
         img.resize([res[1], res[0], 3])
         img2 = cv.cvtColor(img, cv.COLOR_RGB2BGR)
         img2 = cv.flip(img2, 0)
-
-        
-        #cv.imshow("mask", added_img)
-        #cv.imshow("res", res)
         a = detect_orientation(img2)
-        #cv.imshow("image", img2)    
     
-    #image_byte_array = array.array('b', image)
-    #im = Image.frombuffer("RGB",(res[0], res[1]), image_byte_array, "raw", "RGB", 0, 1)
-    #cv.imshow("image", im)
-
     #_, frame = cap.read()
     #cv.imshow('frame',frame)
 

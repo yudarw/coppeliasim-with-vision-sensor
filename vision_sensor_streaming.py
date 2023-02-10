@@ -121,7 +121,7 @@ while sim.simxGetConnectionId(mSim.clientId != -1):
     #_, frame = cap.read()
     #cv.imshow('frame',frame)
 
-    key = cv.waitKey(1) & 0xFF
+    key = cv.waitKey(5) & 0xFF
     if key == 27:
         break
 

@@ -117,6 +117,5 @@ while clientId != -1:
     #elif ret == sim.simx_return_novalue_flag:
     #    print('No image yet')
     #    pass
-
     #if cv.waitKey(0):
     #    cv.destroyAllWindows()

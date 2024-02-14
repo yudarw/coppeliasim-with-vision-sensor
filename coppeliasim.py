@@ -238,5 +238,24 @@ class CoppeliaSensor(CoppeliaSim):
         return ret, resolution, image
 
     def getProximityStatus(self):
-        a, b, c, d = sim.simxReadProximitySensor(self.clientId, self.sensorHandle,sim.simx_opmode_blocking)
-        return a
+        res, dist, point, obj, n = sim.simxReadProximitySensor(self.clientId, self.sensorHandle,sim.simx_opmode_blocking)
+        return res, dist
+
+# Conveyor:
+class Conveyor(CoppeliaSim):
+    def __init__(self, ObjName):
+        self.conveyorHandle = 0
+        self.script = '/UR10'
+        res, self.conveyorHandle = sim.simxGetObjectHandle(self.clientId, ObjName, sim.simx_opmode_oneshot_wait)
+        print("Conveyor Handle = ", self.conveyorHandle)
+
+    def setSpeed(self, speed):
+         # Set Conveyor Sped
+        _speed = [speed]
+        _handle = [self.conveyorHandle]
+        ret = sim.simxCallScriptFunction(self.clientId, self.script,
+                                         sim.sim_scripttype_childscript,
+                                         'remoteApi_setConveyorSpeed',
+                                         _handle, _speed, [], '',
+                                         sim.simx_opmode_blocking)
+        print("Set conveyor speed = ", speed)

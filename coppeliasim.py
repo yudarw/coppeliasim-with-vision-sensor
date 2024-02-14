@@ -218,18 +218,25 @@ class CoppeliaArmRobot(CoppeliaSim):
                                          sim.simx_opmode_blocking)
 
 # =======================================================================
-    # Class Coppelia Sensors
-    # =======================================================================
+# Class Coppelia Sensors
+# =======================================================================
 class CoppeliaSensor(CoppeliaSim):
     def __init__(self, sensorName, sensorType):
         self.sensorHandle = 0
         self.clientId = CoppeliaSim.clientId
         res, self.sensorHandle = sim.simxGetObjectHandle(self.clientId, sensorName, sim.simx_opmode_oneshot_wait)
         if self.sensorHandle != 0:
-            if sensorType == 0:
+            if sensorType == "Vision":
                 ret, resolution, image = sim.simxGetVisionSensorImage(self.clientId, self.sensorHandle, 0, sim.simx_opmode_streaming)
+            
+            #elif sensorType == "Proximity":
+            #    ret = sim.simxReadProximitySensor(self.clientId, self.sensorHandle,sim.simx_opmode_streaming)
     # ========================================================
 
     def getImage(self):
         ret, resolution, image = sim.simxGetVisionSensorImage(self.clientId, self.sensorHandle, 0, sim.simx_opmode_buffer)
         return ret, resolution, image
+
+    def getProximityStatus(self):
+        a, b, c, d = sim.simxReadProximitySensor(self.clientId, self.sensorHandle,sim.simx_opmode_blocking)
+        return a

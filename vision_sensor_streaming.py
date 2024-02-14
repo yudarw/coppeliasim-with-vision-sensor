@@ -87,7 +87,7 @@ def detect_orientation(img):
         #                       (center[0] + 295, center[1] + 10), (255, 255, 255), -1)
 
         cv.putText(img, label, (center[0], center[1]),
-                   cv.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 0), 1, cv.LINE_AA)
+                   cv.FONT_HERSHEY_SIMPLEX, 0.6, (0, 0, 255), 1, cv.LINE_AA)
 
         cv.drawContours(img, [box], 0, (0, 0, 255), 2)
 

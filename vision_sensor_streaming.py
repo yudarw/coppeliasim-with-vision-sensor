@@ -100,7 +100,7 @@ def detect_orientation(img):
 mSim = CoppeliaSim()
 mSim.connect(19997)
 camera = CoppeliaSensor("Vision_sensor", "Vision")
-proximitySensor = CoppeliaSensor("Proximity_sensor", "Proximity")
+#proximitySensor = CoppeliaSensor("Proximity_sensor", "Proximity")
 
 time.sleep(2)
 
@@ -122,10 +122,10 @@ while sim.simxGetConnectionId(mSim.clientId != -1):
     #_, frame = cap.read()
     #cv.imshow('frame',frame)
 
-    ret = proximitySensor.getProximityStatus()
-    print(ret)
+    #ret = proximitySensor.getProximityStatus()
+    #print(ret)
 
-    key = cv.waitKey(100) & 0xFF
+    key = cv.waitKey(1) & 0xFF
     if key == 27:
         break
 

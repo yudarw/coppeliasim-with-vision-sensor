@@ -16,6 +16,10 @@ if clientID != -1:
     newpos[0] = newpos[0] + 100
 
     robot.setPosition(newpos)
+    time.sleep(5)
+
+    pos = robot.readPosition()
+    print(pos)
 
     time.sleep(5)
     msim.stopSimulation()

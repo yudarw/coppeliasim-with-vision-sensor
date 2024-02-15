@@ -18,6 +18,7 @@ try:
     else:
         file_extension = '.so'
     libfullpath = os.path.join(os.path.dirname(__file__), 'remoteApi' + file_extension)
+    #libfullpath = "E:\Yuda\vscode\coppeliasim-with-vision-sensor\remoteApi.dll"
     libsimx = ct.CDLL(libfullpath)
 except:
     print ('----------------------------------------------------')

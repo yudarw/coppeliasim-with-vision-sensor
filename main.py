@@ -21,5 +21,4 @@ if __name__ == '__main__':
         res, dist = sensor.getProximityStatus()
         if dist == True:
             conveyor.setSpeed(0)
-
         time.sleep(0.1)

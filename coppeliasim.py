@@ -153,7 +153,7 @@ class CoppeliaArmRobot(CoppeliaSim):
 
 
     # Set robot positon with wait signal
-    def setPosition2(self, pos, wait):
+    def setPosition2(self, pos, wait=True):
         self.setPosition(pos)
         if wait:
             while True:
@@ -215,6 +215,21 @@ class CoppeliaArmRobot(CoppeliaSim):
                                          sim.sim_scripttype_childscript,
                                          'remoteApi_setGripper',
                                          command, [], [], '',
+                                         sim.simx_opmode_blocking)
+    
+    # Suction ON
+    def suctionON(self):
+        ret = sim.simxCallScriptFunction(self.clientID, self.script,
+                                         sim.sim_scripttype_childscript,
+                                         'remoteApi_suctionOn',
+                                         [], [], [], '',
+                                         sim.simx_opmode_blocking)
+    # Suction OFF
+    def suctionOFF(self):
+        ret = sim.simxCallScriptFunction(self.clientID, self.script,
+                                         sim.sim_scripttype_childscript,
+                                         'remoteApi_suctionOff',
+                                         [], [], [], '',
                                          sim.simx_opmode_blocking)
 
 # =======================================================================
